@@ -4,31 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#5b57f7" />
-  <title>Kalkulator Oferty GigaBox</title>
+  <title>Kalkulator Oferty GigaNet 3.1 – v3.0</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
   <header class="hero">
     <div class="container">
-      <div class="hero-badge">✨ Multiplay • Kalkulator Promocji i Ofert</div>
+      <div class="hero-badge">✨ Wersja 3.0 • osobne pliki • GitHub Pages ready</div>
 
       <div class="hero-content">
         <div class="hero-copy">
           <h1>
             Kalkulator Oferty
-            <span>GigaBox</span>
+            <span>GigaNet 3.1</span>
           </h1>
           <p>
-            Skonfiguruj ofertę w kilka sekund i pokaż klientowi przejrzystą, atrakcyjną cenę — bez ręcznego liczenia i sprawdzania regulaminów.
+            Skonfiguruj ofertę w kilka sekund i pokaż klientowi przejrzystą,
+  atrakcyjną cenę — bez ręcznego liczenia, bez chaosu, bez zbędnego klikania.
           </p>
         </div>
 
         <div class="hero-brand">
-          <div class="brand-logo-wrap">
-            <img src="logo_multiplay_new.svg" alt="Multiplay" class="brand-logo" />
-          </div>
-        </div>
+  <div class="brand-logo-wrap">
+    <img
+  src="logo_multiplay_new.svg"
+  alt="Multiplay"
+  class="brand-logo"
+/>
+  </div>
+</div>
       </div>
     </div>
   </header>
@@ -36,287 +41,389 @@
   <main class="container main-grid">
     <section class="left-column">
 
-      <section class="config-section">
-        <div class="section-header">
-          <h2>👤 Klient i umowa</h2>
-        </div>
-        
-        <div class="card-grid">
-          <label class="select-card active" data-status="Nowy">
-            <input type="radio" name="status" value="Nowy" checked />
-            <div class="card-content">
-              <span class="card-title">Nowy Klient</span>
-              <span class="card-desc">Brak usług od 3 m-cy</span>
-            </div>
-          </label>
-          <label class="select-card" data-status="Obecny">
-            <input type="radio" name="status" value="Obecny" />
-            <div class="card-content">
-              <span class="card-title">Obecny Klient</span>
-              <span class="card-desc">Przedłużenie umowy</span>
-            </div>
-          </label>
+      <section class="panel">
+        <div class="panel-head">
+          <div class="step-badge step-indigo">1</div>
+          <div>
+            <h2>Parametry oferty</h2>
+            <p>Tu ustawiasz bazę, czyli szkielet całej wyceny.</p>
+          </div>
         </div>
 
-        <div class="card-grid" style="margin-top: 16px;">
-          <label class="select-card" data-commitment="12">
-            <input type="radio" name="commitment" value="12" />
-            <div class="card-content">
-              <span class="card-title">12 miesięcy</span>
-            </div>
-          </label>
-          <label class="select-card active" data-commitment="24">
-            <input type="radio" name="commitment" value="24" checked />
-            <div class="card-content">
-              <span class="card-title">24 miesiące</span>
-            </div>
-          </label>
+        <div class="config-block">
+          <div class="block-label">Okres umowy</div>
+          <div class="card-grid cols-2">
+            <button class="select-card" data-group="commitment" data-value="12">
+              <div class="card-icon">⏱️</div>
+              <div class="card-title">12 miesięcy</div>
+              <div class="card-sub">krótsze zobowiązanie</div>
+            </button>
+            <button class="select-card" data-group="commitment" data-value="24">
+              <div class="card-icon">⏳</div>
+              <div class="card-title">24 miesiące</div>
+              <div class="card-sub">lepsza cena</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-block">
+          <div class="block-label">Typ budynku</div>
+          <div class="card-grid cols-2">
+            <button class="select-card" data-group="building" data-value="SFH">
+              <div class="card-icon">🏡</div>
+              <div class="card-title">Domek (SFH)</div>
+              <div class="card-sub">jednorodzinny</div>
+            </button>
+            <button class="select-card" data-group="building" data-value="MFH">
+              <div class="card-icon">🏢</div>
+              <div class="card-title">Blok (MFH)</div>
+              <div class="card-sub">wielorodzinny</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-block">
+          <div class="block-label">Status klienta</div>
+          <div class="card-grid cols-2">
+            <button class="select-card" data-group="status" data-value="Nowy">
+              <div class="card-icon">✨</div>
+              <div class="card-title">Nowy klient</div>
+              <div class="card-sub">pierwsza umowa</div>
+            </button>
+            <button class="select-card" data-group="status" data-value="Obecny">
+              <div class="card-icon">♻️</div>
+              <div class="card-title">Obecny klient</div>
+              <div class="card-sub">przedłużenie / zmiana</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-block">
+          <div class="block-label">Taryfa internetowa</div>
+          <div class="card-grid cols-4">
+            <button class="select-card" data-group="tariff" data-value="600/100">
+              <div class="card-icon">🌐</div>
+              <div class="card-title">600 / 100</div>
+              <div class="card-sub">solidny standard</div>
+            </button>
+            <button class="select-card" data-group="tariff" data-value="800/200">
+              <div class="card-icon">🚀</div>
+              <div class="card-title">800 / 200</div>
+              <div class="card-sub">szybciej</div>
+            </button>
+            <button class="select-card" data-group="tariff" data-value="1000/300">
+              <div class="card-icon">⚡</div>
+              <div class="card-title">1000 / 300</div>
+              <div class="card-sub">mocniej</div>
+            </button>
+            <button class="select-card" data-group="tariff" data-value="2000/2000">
+              <div class="card-icon">🔥</div>
+              <div class="card-title">2000 / 2000</div>
+              <div class="card-sub">pełne turbo</div>
+            </button>
+          </div>
         </div>
       </section>
 
-      <section class="config-section">
-        <div class="section-header">
-          <h2>🏠 Miejsce instalacji</h2>
+      <section class="panel">
+        <div class="panel-head">
+          <div class="step-badge step-orange">2</div>
+          <div>
+            <h2>Zgody i rabaty</h2>
+            <p>Rabat jest miły. Brak rabatu już trochę mniej.</p>
+          </div>
         </div>
-        <div class="card-grid">
-          <label class="select-card active" data-building="SFH">
-            <input type="radio" name="building" value="SFH" checked />
-            <div class="card-content">
-              <span class="card-title">Domek (SFH)</span>
-            </div>
-          </label>
-          <label class="select-card" data-building="MFH">
-            <input type="radio" name="building" value="MFH" />
-            <div class="card-content">
-              <span class="card-title">Blok (MFH)</span>
-            </div>
-          </label>
+
+        <div class="card-grid cols-2">
+          <button class="toggle-card" data-toggle="efaktura">
+            <div class="card-icon">📧</div>
+            <div class="card-title">E-faktura</div>
+            <div class="card-sub">rabat 10 zł / mies.</div>
+          </button>
+
+          <button class="toggle-card" data-toggle="marketing">
+            <div class="card-icon">📢</div>
+            <div class="card-title">Zgoda marketingowa</div>
+            <div class="card-sub">rabat 5 zł / mies.</div>
+          </button>
+        </div>
+
+        <div class="info-pills">
+          <div class="info-pill">Brak e-faktury = +10 zł / mies.</div>
+          <div class="info-pill">Brak zgody marketingowej = +5 zł / mies.</div>
         </div>
       </section>
 
-      <section class="config-section">
-        <div class="section-header">
-          <h2>⚡ Prędkość Internetu</h2>
+      <section class="panel">
+        <div class="panel-head">
+          <div class="step-badge step-cyan">3</div>
+          <div>
+            <h2>Telefon stacjonarny</h2>
+            <p>Opcjonalnie. Czyli bez presji, bez dramatu.</p>
+          </div>
         </div>
-        <div class="card-grid tariff-grid">
-          <label class="select-card active" data-tariff="600/100">
-            <input type="radio" name="tariff" value="600/100" checked />
-            <div class="card-content">
-              <span class="card-title">600/100 Mb/s</span>
-            </div>
-          </label>
-          <label class="select-card" data-tariff="800/200">
-            <input type="radio" name="tariff" value="800/200" />
-            <div class="card-content">
-              <span class="card-title">800/200 Mb/s</span>
-            </div>
-          </label>
-          <label class="select-card" data-tariff="1000/300">
-            <input type="radio" name="tariff" value="1000/300" />
-            <div class="card-content">
-              <span class="card-title">1000/300 Mb/s</span>
-            </div>
-          </label>
-          <label class="select-card" data-tariff="2000/2000">
-            <input type="radio" name="tariff" value="2000/2000" />
-            <div class="card-content">
-              <span class="card-title">2000/2000 Mb/s</span>
-              <span class="card-desc">Symetryk w cenie</span>
-            </div>
-          </label>
+
+        <div class="card-grid cols-4">
+          <button class="select-card" data-group="phone" data-value="off">
+            <div class="card-icon">🚫</div>
+            <div class="card-title">Bez telefonu</div>
+            <div class="card-sub">0 zł / mies.</div>
+          </button>
+
+          <button class="select-card" data-group="phone" data-value="UE60">
+            <div class="card-icon">📞</div>
+            <div class="card-title">UE 60</div>
+            <div class="card-sub">9,99 zł / mies.</div>
+          </button>
+
+          <button class="select-card" data-group="phone" data-value="UE300">
+            <div class="card-icon">☎️</div>
+            <div class="card-title">300 UE</div>
+            <div class="card-sub">14,99 zł / mies.</div>
+          </button>
+
+          <button class="select-card" data-group="phone" data-value="NoLimit">
+            <div class="card-icon">📱</div>
+            <div class="card-title">NoLimit Max</div>
+            <div class="card-sub">19,99 zł / mies.</div>
+          </button>
         </div>
       </section>
 
-      <section class="config-section">
-        <div class="section-header">
-          <h2>➕ Usługi dodatkowe</h2>
-        </div>
-        
-        <div class="toggle-card">
-          <div class="toggle-info">
-            <span class="toggle-title">Łącze Symetryczne</span>
-            <span class="toggle-desc" id="symmetric-desc">+10,00 zł / mies.</span>
+      <section class="panel">
+        <div class="panel-head">
+          <div class="step-badge step-pink">4</div>
+          <div>
+            <h2>Usługi dodatkowe</h2>
+            <p>Tu zaczynają się dodatki, promocje i inne małe potwory abonamentowe.</p>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="symmetric-checkbox" />
-            <span class="slider round"></span>
-          </label>
         </div>
 
-        <div class="toggle-card" style="margin-top: 12px;">
-          <div class="toggle-info">
-            <span class="toggle-title">Internet Plus (Zewn. IP)</span>
-            <span class="toggle-desc">+10,00 zł / mies.</span>
+        <div class="config-block">
+          <div class="block-label">Dodatki włącz / wyłącz</div>
+          <div class="card-grid cols-2">
+            <button class="toggle-card" data-toggle="symmetric">
+              <div class="card-icon">⚡</div>
+              <div class="card-title">Łącze symetryczne</div>
+              <div class="card-sub">10 zł / mies.</div>
+            </button>
+
+            <button class="toggle-card" data-toggle="internetPlus">
+              <div class="card-icon">🌐</div>
+              <div class="card-title">Internet+</div>
+              <div class="card-sub">10 zł / mies.</div>
+            </button>
+
+            <button class="toggle-card" data-toggle="renewalDiscount" id="renewal-discount-btn">
+              <div class="card-icon">🎯</div>
+              <div class="card-title">Rabat odnowieniowy</div>
+              <div class="card-sub">symetryk za 5 zł / mies.</div>
+            </button>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="ip-checkbox" />
-            <span class="slider round"></span>
-          </label>
+
+          <div class="helper-text" id="renewal-note">
+            Rabat odnowieniowy działa tylko dla obecnego klienta przy aktywnym łączu symetrycznym.
+          </div>
         </div>
 
-        <div style="margin-top: 16px;">
-          <label class="small-label" style="display:block; margin-bottom:6px; font-weight:600;">Abonament Komórkowy</label>
-          <select id="phone-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--line); font-family: inherit; font-size: 15px;">
-            <option value="off">Brak telefonu</option>
-            <option value="UE60">Smartfon UE 60 (+9,99 zł)</option>
-            <option value="UE300">Smartfon UE 300 (+14,99 zł)</option>
-            <option value="NoLimit">Smartfon No Limit (+19,99 zł)</option>
-          </select>
+        <div class="config-block wifi-premium-block">
+          <div class="block-label">WiFi Premium (MESH)</div>
+
+          <div class="wifi-count-wrap">
+            <div class="slider-header">
+              <span class="slider-label">Ilość urządzeń</span>
+              <span class="slider-value" id="wifi-count-value">0 szt.</span>
+            </div>
+            <input
+              type="range"
+              id="wifi-count-slider"
+              min="0"
+              max="5"
+              step="1"
+              value="0"
+              class="promo-slider"
+            />
+          </div>
+
+          <div class="wifi-install-wrap disabled" id="wifi-install-wrap">
+            <div class="small-label">Wariant instalacji</div>
+            <div class="wifi-install-options">
+              <button type="button" class="wifi-install-option active" data-install-type="self" aria-pressed="true">Self Instal</button>
+              <button type="button" class="wifi-install-option" data-install-type="technician" aria-pressed="false">Wyjazd technika (+100 zł jednorazowo)</button>
+            </div>
+          </div>
+
+          <div class="wifi-info-hint">
+            Usługa WiFi Premium zawsze wiąże się z opłatą aktywacyjną. Aktywacja liczona jest za każde urządzenie (Self Instal). Wyjazd technika: +100 zł jednorazowo (niezależnie od liczby urządzeń).
+          </div>
+        </div>
+
+        <div class="config-block">
+          <div class="block-label">Pakiet bezpieczeństwa (1 wariant naraz)</div>
+          <div class="card-grid cols-4">
+            <button class="select-card" data-group="security" data-value="off">
+              <div class="card-icon">🧊</div>
+              <div class="card-title">Bez pakietu</div>
+              <div class="card-sub">0 zł / mies.</div>
+            </button>
+
+            <button class="select-card" data-group="security" data-value="is1">
+              <div class="card-icon">🛡️</div>
+              <div class="card-title">Internet Security 1</div>
+              <div class="card-sub">9 zł / mies.</div>
+            </button>
+
+            <button class="select-card" data-group="security" data-value="is3">
+              <div class="card-icon">🛡️</div>
+              <div class="card-title">Internet Security 3</div>
+              <div class="card-sub">14,99 zł / mies.</div>
+            </button>
+
+            <button class="select-card" data-group="security" data-value="mobile">
+              <div class="card-icon">📱</div>
+              <div class="card-title">Mobile</div>
+              <div class="card-sub">6 zł / mies.</div>
+            </button>
+
+            <button class="select-card" data-group="security" data-value="family">
+              <div class="card-icon">👨‍👩‍👧‍👦</div>
+              <div class="card-title">Pakiet rodzinny</div>
+              <div class="card-sub">20 zł / mies.</div>
+            </button>
+
+            <button class="select-card" data-group="security" data-value="mac1">
+              <div class="card-icon">🍎</div>
+              <div class="card-title">Mac 1</div>
+              <div class="card-sub">9 zł / mies.</div>
+            </button>
+
+            <button class="select-card" data-group="security" data-value="mac3">
+              <div class="card-icon">🍏</div>
+              <div class="card-title">Mac 3</div>
+              <div class="card-sub">14,99 zł / mies.</div>
+            </button>
+          </div>
         </div>
       </section>
-
-      <section class="config-section" id="promotions-section">
-        <div class="section-header">
-          <h2>🎁 Promocje i benefity</h2>
-          <p>Wybierz promocję główną i ewentualne dodatki z regulaminu</p>
-        </div>
-
-        <div class="card-grid promo-grid" id="main-promo-grid">
-          <label class="select-card active" data-promo="none">
-            <input type="radio" name="promo" value="none" checked />
-            <div class="card-content">
-              <span class="card-title">Brak promocji</span>
-              <span class="card-desc">Standardowy cennik</span>
-            </div>
-          </label>
-
-          <label class="select-card" data-promo="6za1" id="promo-6za1">
-            <input type="radio" name="promo" value="6za1" />
-            <div class="card-content">
-              <span class="card-title">6 za 1</span>
-              <span class="card-desc">Abonament 1 zł na start</span>
-            </div>
-          </label>
-
-          <label class="select-card" data-promo="ztr2026" id="promo-ztr2026">
-            <input type="radio" name="promo" value="ztr2026" />
-            <div class="card-content">
-              <span class="card-title">ZTR 2026</span>
-              <span class="card-desc">Przejście z innej sieci</span>
-            </div>
-          </label>
-
-          <label class="select-card" data-promo="powrot" id="promo-powrot">
-            <input type="radio" name="promo" value="powrot" />
-            <div class="card-content">
-              <span class="card-title">Powrót do Multiplay</span>
-              <span class="card-desc">Odkupienie + 3 mies. ekstra</span>
-            </div>
-          </label>
-
-          <label class="select-card" data-promo="prezent" id="promo-prezent" style="display: none;">
-            <input type="radio" name="promo" value="prezent" />
-            <div class="card-content">
-              <span class="card-title">Wybierz swój prezent</span>
-              <span class="card-desc">Gadżet za przedłużenie</span>
-            </div>
-          </label>
-        </div>
-
-        <div class="conditional-setting" id="external-months-container" style="display: none; margin-top: 16px; padding: 16px; background: var(--bg-1); border-radius: var(--radius-md); border: 1px solid var(--line);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <label for="external-remaining-months" style="font-size: 14px; font-weight: 600; color: var(--text);">Liczba miesięcy do końca u obecnego operatora:</label>
-            <strong id="external-months-display" style="color: var(--brand-b); font-size: 16px;">1 mies.</strong>
-          </div>
-          <input type="range" id="external-remaining-months" min="1" max="24" value="1" style="width: 100%;" />
-          <div class="tiny-note" style="margin-top: 6px;">
-            ZTR 2026: max 12 mies. | Powrót do Multiplay: max 24 mies. (okres odkupienia + 3m).
+      <section class="panel">
+        <div class="panel-head">
+          <div class="step-badge step-pink">5</div>
+          <div>
+            <h2>Promocje i benefity</h2>
+            <p>Wybierz promocję zgodnie z regulaminem i statusem klienta.</p>
           </div>
         </div>
 
-        <div class="toggle-card" style="margin-top: 16px;">
-          <div class="toggle-info">
-            <span class="toggle-title">Promocja Banerowa</span>
-            <span class="toggle-desc">+3 miesiące abonamentu za 1 zł (łączy się z innymi)</span>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="banner-combined-checkbox" />
-            <span class="slider round"></span>
-          </label>
+        <div class="config-block">
+          <label class="block-label" for="promotion-type-select">Promocja główna</label>
+          <select id="promotion-type-select" class="promo-select"></select>
+          <div class="helper-text" id="promotion-type-helper"></div>
         </div>
-      </section>
 
-      <section class="config-section">
-        <div class="section-header">
-          <h2>📝 Zgody formalne</h2>
-        </div>
-        <div class="toggle-card">
-          <div class="toggle-info">
-            <span class="toggle-title">E-faktura</span>
-            <span class="toggle-desc">Zniżka 10 zł / mies. (uwzględniona w wyliczeniach)</span>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="efaktura-checkbox" checked />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="toggle-card" style="margin-top: 12px;">
-          <div class="toggle-info">
-            <span class="toggle-title">Zgoda marketingowa</span>
-            <span class="toggle-desc">Zniżka 5 zł / mies. (uwzględniona w wyliczeniach)</span>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="marketing-checkbox" checked />
-            <span class="slider round"></span>
-          </label>
+        <div class="config-block" id="promotion-config-fields"></div>
+
+        <div class="config-block">
+          <div class="helper-text" id="promotion-business-notes"></div>
         </div>
       </section>
 
     </section>
 
-    <section class="right-column summary-sticky">
-      <div class="summary-header">
-        <h2>Podsumowanie</h2>
-        <div class="badge" id="summary-status-badge">Nowy Klient</div>
-      </div>
+    <aside class="right-column">
+      <div class="summary-stack">
 
-      <div class="detail-row">
-        <span>Zobowiązanie</span>
-        <strong id="summary-commitment">24 miesiące</strong>
-      </div>
-      <div class="detail-row">
-        <span>Taryfa / Zabudowa</span>
-        <strong id="summary-tariff-building">600/100 Mb/s (SFH)</strong>
-      </div>
-      
-      <div class="active-promotion-section" style="margin-top: 12px; margin-bottom: 12px;">
-        <div class="small-label">Aktywna promocja i benefity</div>
-        <div id="active-promotion-summary" class="active-promotion-summary">Brak promocji</div>
-      </div>
+        <section class="panel summary-panel">
+          <div class="summary-top">
+            <div>
+              <div class="small-label">Podsumowanie oferty</div>
+              <h2 class="summary-title">Cena końcowa</h2>
+            </div>
+            
+          </div>
 
-      <div class="summary-price-card avg-price-card">
-        <div class="small-label">Uśredniona wartość abonamentu</div>
-        <div id="avg-monthly" class="price-avg">0,00 zł / mies.</div>
-      </div>
+          <div class="summary-prices">
+            <div class="summary-price-card">
+              <div class="small-label">Miesięcznie</div>
+              <div id="monthly-total" class="price-main">85 zł</div>
+            </div>
 
-      <div class="summary-price-card promo-periods-card" id="promo-periods-card">
-        <div class="small-label">Abonament w okresach promocji</div>
-        <div id="promo-periods-list" class="promo-periods-list"></div>
-      </div>
+            <div class="summary-price-card">
+              <div class="small-label">Start</div>
+              <div id="one-time-total" class="price-side">249 zł</div>
+            </div>
+          </div>
 
-      <div class="detail-row promo-total-saving">
-        <span>Łączna oszczędność z promocji</span>
-        <strong id="total-promo-saving" class="break-green">0 zł</strong>
-      </div>
+          <div class="summary-details">
+            <div class="detail-row"><span>Okres</span><strong id="detail-commitment">24 miesiące</strong></div>
+            <div class="detail-row"><span>Budynek</span><strong id="detail-building">Domek (SFH)</strong></div>
+            <div class="detail-row"><span>Status</span><strong id="detail-status">Nowy klient</strong></div>
+            <div class="detail-row"><span>Taryfa</span><strong id="detail-tariff">600/100</strong></div>
+          </div>
 
-      <div class="detail-row" style="margin-top: 8px;">
-        <span>Jednorazowa opłata instalacyjna/aktywacyjna</span>
-        <strong id="summary-activation-price">0 zł</strong>
-      </div>
+          <div class="divider"></div>
 
-      <div class="divider"></div>
+          <div class="summary-lines">
+            <div class="detail-row"><span>Abonament bazowy</span><strong id="line-base">85 zł</strong></div>
+            <div class="detail-row"><span>Korekty za zgody</span><strong id="line-consents">0 zł</strong></div>
+            <div class="detail-row"><span>Telefon</span><strong id="line-phone">0 zł</strong></div>
+            <div class="detail-row"><span>Dodatki</span><strong id="line-addons">0 zł</strong></div>
+            <div class="detail-row" id="line-wifi-monthly-row" style="display:none;"><span id="line-wifi-monthly-label">WiFi Premium (0x)</span><strong id="line-wifi-monthly">0 zł</strong></div>
+          </div>
 
-      <div class="promo-box">
-        <div class="promo-title">GigaBox by Multiplay</div>
-        <p>
-          Uśredniona cena to najsilniejszy argument sprzedażowy. System automatycznie przelicza wartości dla miesięcy po 1 zł (bez doliczania kar za brak zgód!).
-        </p>
-      </div>
+          <div class="divider"></div>
 
-      <div class="tiny-note">
-        Brak e-faktury = +10 zł / mies. (poza okresem promocyjnym) • Brak zgody marketingowej = +5 zł / mies. (poza okresem promocyjnym) • Wszystkie podane ceny zawierają VAT.
+          <div class="summary-lines">
+            <div class="detail-row"><span>Instalacja</span><strong id="line-install">249 zł</strong></div>
+            <div class="detail-row"><span>Aktywacja dodatków</span><strong id="line-activation">0 zł</strong></div>
+            <div class="detail-row" id="line-wifi-activation-row" style="display:none;"><span id="line-wifi-activation-label">Aktywacja WiFi Premium (0x)</span><strong id="line-wifi-activation">0 zł</strong></div>
+            <div class="detail-row" id="line-wifi-technician-row" style="display:none;">
+              <span>Wyjazd technika (WiFi Premium)</span>
+              <strong id="line-wifi-technician">0 zł</strong>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="summary-price-card promo-active-card">
+            <div class="small-label">Aktywna promocja i benefity</div>
+            <div id="active-promotion-summary" class="active-promotion-summary"></div>
+          </div>
+
+          <div class="summary-price-card avg-price-card">
+            <div class="small-label">Uśredniona wartość abonamentu</div>
+            <div id="avg-monthly" class="price-avg">0,00 zł / mies.</div>
+          </div>
+
+          <div class="summary-price-card promo-periods-card" id="promo-periods-card">
+            <div class="small-label">Abonament w okresach promocji</div>
+            <div id="promo-periods-list" class="promo-periods-list"></div>
+          </div>
+
+          <div class="detail-row promo-total-saving">
+            <span>Łączna oszczędność z promocji</span>
+            <strong id="total-promo-saving" class="break-green">0 zł</strong>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="promo-box">
+            <div class="promo-title">Najprostsza decyzja</div>
+            <p>
+              Skonfiguruj ofertę, pokaż klientowi cenę i gotowe. Mniej klikania, mniej chaosu,
+              więcej konkretu.
+            </p>
+          </div>
+
+          <div class="tiny-note">
+            Brak e-faktury = +10 zł / mies. • Brak zgody marketingowej = +5 zł / mies. •
+            WiFi Premium = opłata miesięczna i aktywacja za każde urządzenie • wyjazd technika +100 zł jednorazowo.
+          </div>
+        </section>
+
+        
+
       </div>
-    </section>
+    </aside>
   </main>
 </body>
 </html>
