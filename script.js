@@ -32,7 +32,7 @@ let priceConfig = {
   addons: {},
 };
 
-const STORAGE_KEY = "gigabox_calc_state_v9";
+const STORAGE_KEY = "gigabox_calc_state_v10";
 
 function byId(id) {
   return document.getElementById(id);
@@ -170,6 +170,10 @@ function validateState() {
 
   if (state.bannerPromo && state.promo === "none" && state.gift === "none") {
     state.bannerPromo = false;
+  }
+
+  if (state.tvCplusSport && state.tvCplusFilms) {
+    state.tvCplusFilms = false;
   }
 }
 
@@ -379,6 +383,15 @@ function syncControls() {
     const el = byId(id);
     if (el) el.checked = !!state[key];
   });
+
+  const canalSport = byId("tv-cplus-sport");
+  const canalFilms = byId("tv-cplus-films");
+  if (canalSport) {
+    canalSport.disabled = false;
+  }
+  if (canalFilms) {
+    canalFilms.disabled = false;
+  }
 
   const meshCount = byId("mesh-count");
   const meshLabel = byId("mesh-label");
@@ -637,6 +650,11 @@ function calculate() {
     notes.push("Aktywny dodatek: Telefon NoLimit 9,99 zł / mies.");
   }
   if (canalMonthly > 0) {
+    notes.push(
+      state.tvCplusSport
+        ? "Wybrano wariant Canal+: C+ Super Sport."
+        : "Wybrano wariant Canal+: C+ Seriale i Filmy.",
+    );
     notes.push(
       commitmentMonths > 12
         ? "Canal+ jest liczony tylko przez 12 pierwszych miesięcy umowy."
@@ -908,8 +926,6 @@ function bindStaticEvents() {
 
   [
     ["tv-max", "tvMax"],
-    ["tv-cplus-sport", "tvCplusSport"],
-    ["tv-cplus-films", "tvCplusFilms"],
     ["tv-pvr-m", "tvPvrM"],
     ["tv-pvr-l", "tvPvrL"],
   ].forEach(([id, key]) => {
@@ -920,6 +936,28 @@ function bindStaticEvents() {
       render();
     });
   });
+
+  const canalSport = byId("tv-cplus-sport");
+  if (canalSport) {
+    canalSport.addEventListener("change", () => {
+      state.tvCplusSport = !!canalSport.checked;
+      if (state.tvCplusSport) {
+        state.tvCplusFilms = false;
+      }
+      render();
+    });
+  }
+
+  const canalFilms = byId("tv-cplus-films");
+  if (canalFilms) {
+    canalFilms.addEventListener("change", () => {
+      state.tvCplusFilms = !!canalFilms.checked;
+      if (state.tvCplusFilms) {
+        state.tvCplusSport = false;
+      }
+      render();
+    });
+  }
 
   const promo = byId("promo");
   if (promo) {
