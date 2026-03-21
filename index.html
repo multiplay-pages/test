@@ -4,685 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multiplay Hub — Kalkulatory i narzędzia</title>
-  <meta name="description" content="Zwarty hub Multiplay z kalkulatorami, narzędziami i materiałami dla pracowników." />
+  <meta
+    name="description"
+    content="Zwarty hub Multiplay z kalkulatorami, narzędziami i materiałami dla pracowników."
+  />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet"
+  />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; min-height: 100%; }
-    body {
-      font-family: "Inter", sans-serif;
-      color: #121212;
-      line-height: 1.5;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(115,193,107,0.10), transparent 22%),
-        radial-gradient(circle at top right, rgba(255,205,3,0.08), transparent 24%),
-        linear-gradient(180deg, #f7faf7 0%, #f4f7f3 48%, #f7f7f4 100%);
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: inherit; text-decoration: none; }
-    button, input { font: inherit; }
-    img, svg { display: block; max-width: 100%; }
-    ul { list-style: none; }
-
-    :root {
-      --bg: #f7faf7;
-      --surface: rgba(255,255,255,0.78);
-      --surface-strong: rgba(255,255,255,0.92);
-      --surface-soft: rgba(255,255,255,0.60);
-      --line: rgba(18,18,18,0.10);
-      --line-strong: rgba(18,18,18,0.16);
-      --text: #121212;
-      --muted: #5e6762;
-      --brand-green: #73C16B;
-      --brand-red: #F44D43;
-      --brand-yellow: #F8CB2E;
-      --brand-black: #111111;
-      --ok: #1a7b2a;
-      --info: #8a6a00;
-      --soon: #8a3a34;
-      --shadow: 0 14px 30px rgba(17,17,17,0.05);
-      --shadow-soft: 0 8px 20px rgba(17,17,17,0.04);
-      --radius-xs: 8px;
-      --radius-sm: 12px;
-      --radius-md: 18px;
-      --radius-lg: 24px;
-      --container: min(1380px, calc(100% - 34px));
-      --header-h: 76px;
-      --section-gap: clamp(18px, 2.2vw, 30px);
-    }
-
-    .container { width: var(--container); margin-inline: auto; }
-    .skip-link {
-      position: absolute;
-      top: -100%;
-      left: 16px;
-      z-index: 999;
-      padding: 10px 14px;
-      border-radius: 8px;
-      background: var(--brand-black);
-      color: white;
-    }
-    .skip-link:focus { top: 12px; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .76rem;
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      color: var(--muted);
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-    .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--brand-green);
-      box-shadow: 15px 0 0 var(--brand-yellow), 30px 0 0 var(--brand-red);
-      margin-right: 32px;
-      flex-shrink: 0;
-    }
-
-    .section-shell {
-      position: relative;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      overflow: hidden;
-    }
-
-    .section-top {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 18px 20px 14px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.02));
-    }
-
-    .section-heading {
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.35rem, 2vw, 2.25rem);
-      letter-spacing: -.04em;
-      line-height: .96;
-      text-transform: uppercase;
-    }
-
-    .section-lead {
-      max-width: 42rem;
-      color: var(--muted);
-      font-size: .94rem;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 34px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.54);
-      color: var(--muted);
-      font-size: .84rem;
-      white-space: nowrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 44px;
-      padding: 11px 16px;
-      border-radius: 10px;
-      border: 0;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-      font-weight: 700;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-primary {
-      background: var(--brand-black);
-      color: white;
-      box-shadow: 0 10px 20px rgba(17,17,17,.10);
-    }
-    .btn-secondary {
-      background: rgba(255,255,255,0.72);
-      color: var(--text);
-      border: 1px solid var(--line-strong);
-    }
-
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--header-h);
-      z-index: 100;
-      pointer-events: none;
-    }
-    .site-header .container {
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-    .header-inner {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 10px 14px;
-      border: 1px solid rgba(18,18,18,0.08);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.84);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 18px rgba(17,17,17,0.05);
-      pointer-events: auto;
-    }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      min-width: fit-content;
-    }
-    .brand-logo {
-      width: 166px;
-      height: auto;
-      max-width: 42vw;
-    }
-    .brand-badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 32px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(115,193,107,.22);
-      background: rgba(115,193,107,.10);
-      color: #23411d;
-      font-size: .76rem;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .site-nav ul {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .site-nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 8px 11px;
-      border-radius: 999px;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: .88rem;
-      transition: background .2s ease, color .2s ease;
-    }
-    .site-nav a:hover,
-    .site-nav a:focus-visible {
-      background: rgba(17,17,17,0.06);
-      color: var(--text);
-      outline: none;
-    }
-
-    #smooth-wrapper { position: relative; width: 100%; min-height: 100vh; }
-    #smooth-content { position: relative; width: 100%; }
-
-    .hero {
-      position: relative;
-      padding-top: calc(var(--header-h) + 18px);
-      padding-bottom: 18px;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-    .hero-main,
-    .hero-side {
-      position: relative;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.64));
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .hero-main {
-      padding: 26px 28px;
-      min-height: 330px;
-      display: grid;
-      align-content: space-between;
-      gap: 18px;
-      isolation: isolate;
-    }
-    .hero-main::after {
-      content: "";
-      position: absolute;
-      inset: auto -90px -140px auto;
-      width: 360px;
-      height: 360px;
-      background: url('Ikonyy-3-1024x1024.png') center/contain no-repeat;
-      opacity: 0.09;
-      pointer-events: none;
-      z-index: -1;
-    }
-    .hero-title {
-      max-width: 12ch;
-      font-family: "Syne", sans-serif;
-      font-size: clamp(2.7rem, 5vw, 4.8rem);
-      font-weight: 800;
-      line-height: .88;
-      text-transform: uppercase;
-      letter-spacing: -.06em;
-    }
-    .hero-title .green { color: #519f49; }
-    .hero-title .red { color: var(--brand-red); }
-    .hero-title .yellow { color: #bb9300; }
-    .hero-copy {
-      max-width: 52rem;
-      color: var(--muted);
-      font-size: .98rem;
-    }
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    .hero-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 18px;
-    }
-    .mini-stat {
-      min-height: 86px;
-      padding: 14px 14px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.56);
-    }
-    .mini-label {
-      font-size: .74rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    .mini-value {
-      font-family: "Syne", sans-serif;
-      font-size: 1.2rem;
-      line-height: .95;
-      text-transform: uppercase;
-      letter-spacing: -.03em;
-    }
-
-    .hero-side {
-      padding: 18px;
-      min-height: 330px;
-      display: grid;
-      gap: 14px;
-      align-content: start;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.68)),
-        url('logo_mobile_v2.png') right 14px bottom 14px / 180px auto no-repeat;
-    }
-    .quick-panel {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-    .quick-link {
-      min-height: 92px;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.72);
-      display: grid;
-      gap: 6px;
-      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-      box-shadow: var(--shadow-soft);
-    }
-    .quick-link:hover {
-      transform: translateY(-2px);
-      border-color: rgba(18,18,18,0.16);
-    }
-    .quick-link strong {
-      font-size: 1rem;
-      line-height: 1.05;
-    }
-    .quick-link small {
-      color: var(--muted);
-      font-size: .82rem;
-    }
-    .quick-link span:last-child {
-      font-weight: 800;
-      color: var(--brand-black);
-    }
-
-    .hero-note {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      color: var(--muted);
-      font-size: .86rem;
-    }
-
-    #content { padding-bottom: 0; }
-    .content-stack {
-      display: grid;
-      gap: var(--section-gap);
-      padding-bottom: 24px;
-    }
-
-    .cards-wrap { padding: 16px 18px 18px; }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .tool-card {
-      min-height: 230px;
-      display: grid;
-      grid-template-rows: auto auto 1fr auto;
-      gap: 14px;
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.64));
-      box-shadow: var(--shadow-soft);
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .tool-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(18,18,18,0.16);
-      box-shadow: 0 14px 24px rgba(17,17,17,0.06);
-    }
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .card-index {
-      font-family: "Syne", sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -.05em;
-      text-transform: uppercase;
-    }
-    .card-status {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: .76rem;
-      font-weight: 800;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-      white-space: nowrap;
-    }
-    .status-live { background: rgba(115,193,107,.13); color: var(--ok); border-color: rgba(115,193,107,.24); }
-    .status-beta { background: rgba(248,203,46,.16); color: var(--info); border-color: rgba(248,203,46,.24); }
-    .status-soon { background: rgba(244,77,67,.10); color: var(--soon); border-color: rgba(244,77,67,.18); }
-    .card-title {
-      font-family: "Syne", sans-serif;
-      font-size: 1.2rem;
-      font-weight: 800;
-      line-height: .98;
-      letter-spacing: -.03em;
-      text-transform: uppercase;
-    }
-    .card-desc {
-      color: var(--muted);
-      font-size: .92rem;
-    }
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      align-content: start;
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 6px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.66);
-      color: var(--muted);
-      font-size: .78rem;
-      white-space: nowrap;
-    }
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: var(--brand-black);
-      color: white;
-      font-weight: 700;
-      font-size: .88rem;
-    }
-    .card-link.secondary {
-      background: rgba(255,255,255,0.82);
-      border: 1px solid var(--line);
-      color: var(--muted);
-    }
-    .card-meta {
-      color: var(--muted);
-      font-size: .82rem;
-      text-align: right;
-    }
-
-    .workflow-wrap {
-      padding: 16px 18px 18px;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
-    }
-    .workflow-panel,
-    .workflow-side {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.64));
-      padding: 16px;
-    }
-    .workflow-list {
-      display: grid;
-      gap: 10px;
-    }
-    .workflow-item {
-      display: grid;
-      grid-template-columns: 104px 1fr;
-      gap: 12px;
-      align-items: start;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(18,18,18,0.08);
-    }
-    .workflow-item:last-child { border-bottom: 0; padding-bottom: 0; }
-    .workflow-key {
-      font-size: .76rem;
-      font-weight: 800;
-      color: var(--muted);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .workflow-value {
-      color: var(--text);
-      font-size: .94rem;
-    }
-
-    .cta-strip {
-      padding: 16px 18px 18px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-    .cta-box {
-      min-height: 168px;
-      padding: 16px;
-      border-radius: 18px;
-      display: grid;
-      align-content: space-between;
-      gap: 14px;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
-    }
-    .cta-box h3 {
-      font-family: "Syne", sans-serif;
-      font-size: 1.15rem;
-      line-height: .98;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .cta-box p { color: var(--muted); font-size: .92rem; }
-    .cta-box.green { background: linear-gradient(180deg, rgba(115,193,107,.16), rgba(255,255,255,.86)); }
-    .cta-box.yellow { background: linear-gradient(180deg, rgba(248,203,46,.18), rgba(255,255,255,.86)); }
-    .cta-box.red { background: linear-gradient(180deg, rgba(244,77,67,.12), rgba(255,255,255,.86)); }
-
-    .site-footer {
-      margin-top: 24px;
-      background: #121212;
-      color: #f0f3ef;
-      border-radius: 28px 28px 0 0;
-      overflow: hidden;
-    }
-    .footer-inner {
-      padding: 26px 0 20px;
-      display: grid;
-      gap: 22px;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
-      align-items: start;
-    }
-    .footer-copy {
-      max-width: 58ch;
-      color: rgba(240,243,239,0.74);
-      font-size: .94rem;
-    }
-    .footer-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-    .footer-links a {
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(240,243,239,0.88);
-      background: rgba(255,255,255,0.03);
-      transition: background .2s ease, border-color .2s ease;
-    }
-    .footer-links a:hover,
-    .footer-links a:focus-visible {
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.16);
-      outline: none;
-    }
-    .footer-bottom {
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-size: .9rem;
-      color: rgba(240,243,239,0.68);
-    }
-
-    @media (max-width: 1180px) {
-      .hero-grid,
-      .workflow-wrap,
-      .footer-top {
-        grid-template-columns: 1fr;
-      }
-      .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cta-strip { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 860px) {
-      :root { --header-h: 74px; --container: min(100%, calc(100% - 22px)); }
-      .site-header .container { align-items: flex-start; padding-top: 8px; }
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        border-radius: 18px;
-      }
-      .site-nav { width: 100%; }
-      .site-nav ul { justify-content: flex-start; }
-      .brand-logo { width: 154px; }
-      .hero-main,
-      .hero-side { min-height: auto; }
-      .hero-main { padding: 20px; }
-      .hero-side { padding: 16px; background-size: 150px auto; }
-      .hero-meta,
-      .quick-panel,
-      .card-grid { grid-template-columns: 1fr; }
-      .section-top { flex-direction: column; align-items: flex-start; }
-      .workflow-item { grid-template-columns: 1fr; gap: 6px; }
-      .footer-links { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 560px) {
-      .hero-title { max-width: 8ch; font-size: 2.2rem; }
-      .section-top,
-      .cards-wrap,
-      .workflow-wrap,
-      .cta-strip { padding-left: 14px; padding-right: 14px; }
-      .tool-card,
-      .workflow-panel,
-      .workflow-side,
-      .cta-box { padding: 14px; }
-      .brand-badge { display: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a href="#content" class="skip-link">Przejdź do treści</a>
@@ -691,7 +29,11 @@
     <div class="container">
       <div class="header-inner">
         <a class="brand" href="#hero" aria-label="Przejdź do góry strony">
-          <img class="brand-logo" src="Multiplay_logo_landscape_full-300x119.png" alt="Multiplay" />
+          <img
+            class="brand-logo"
+            src="Multiplay_logo_landscape_full-300x119.png"
+            alt="Multiplay"
+          />
           <span class="brand-badge">Hub pracownika</span>
         </a>
 
@@ -725,8 +67,9 @@
 
               <div>
                 <p class="hero-copy">
-                  Zwarty panel wejściowy dla pracowników: kalkulatory, repozytoria, materiały i skróty operacyjne.
-                  Układ jest bardziej transparentny na desktopie, lżejszy wizualnie i łatwiejszy do dalszej rozbudowy.
+                  Zwarty panel wejściowy dla pracowników: kalkulatory, repozytoria,
+                  materiały i skróty operacyjne. Najważniejsze narzędzia są teraz
+                  wyróżnione bardziej produktowo i czytelniej na desktopie.
                 </p>
 
                 <div class="hero-actions">
@@ -736,49 +79,39 @@
 
                 <div class="hero-meta">
                   <div class="mini-stat">
-                    <div class="mini-label">Cel</div>
-                    <div class="mini-value">Jedno wejście dla zespołu</div>
+                    <div class="mini-label">Priorytet</div>
+                    <div class="mini-value">GigaNET i GigaBOX na pierwszym planie</div>
                   </div>
                   <div class="mini-stat">
                     <div class="mini-label">Układ</div>
-                    <div class="mini-value">Czytelny desktop-first</div>
+                    <div class="mini-value">Lepsza hierarchia i szybszy start</div>
                   </div>
                   <div class="mini-stat">
                     <div class="mini-label">Brand</div>
-                    <div class="mini-value">Logo i kolory Multiplay</div>
+                    <div class="mini-value">Premium hub w stylu Multiplay</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <aside class="hero-side" aria-label="Szybki start">
-              <div class="eyebrow" style="margin-bottom: 2px;">Szybki start</div>
-              <div class="quick-panel">
-                <a class="quick-link" href="https://multiplay-pages.github.io/giganet_kalkulator/" target="_blank" rel="noopener noreferrer">
-                  <strong>GigaNET</strong>
-                  <small>Kalkulator oferty internetowej</small>
-                  <span>Otwórz ↗</span>
-                </a>
-                <a class="quick-link" href="https://multiplay-pages.github.io/gigabox_kalkulator/" target="_blank" rel="noopener noreferrer">
-                  <strong>GigaBOX</strong>
-                  <small>Pakiety + TV i dodatki</small>
-                  <span>Otwórz ↗</span>
-                </a>
-                <a class="quick-link" href="https://multiplay-pages.github.io/test/index2.html" target="_blank" rel="noopener noreferrer">
-                  <strong>Sandbox</strong>
-                  <small>Testy UI i modułów</small>
-                  <span>Otwórz ↗</span>
-                </a>
-                <a class="quick-link" href="https://github.com/multiplay-pages" target="_blank" rel="noopener noreferrer">
-                  <strong>GitHub Pages</strong>
-                  <small>Repozytoria i publikacje</small>
-                  <span>Otwórz ↗</span>
-                </a>
+            <aside class="hero-side" aria-label="Najważniejsze kalkulatory">
+              <div>
+                <div class="eyebrow hero-side-eyebrow">Najważniejsze narzędzia</div>
+                <h2 class="hero-side-title">Wejdź od razu do głównych kalkulatorów</h2>
+                <p class="hero-side-copy">
+                  Dwa najczęściej używane narzędzia mają osobne wyróżnione karty z
+                  mini-podglądem interfejsu.
+                </p>
               </div>
+
+              <div class="featured-grid" id="featured-calculators"></div>
+
               <div class="hero-note">
-                <span class="pill">Mniej pionowego scrolla na starcie</span>
-                <span class="pill">Lepsza czytelność na laptopie i desktopie</span>
+                <span class="pill">Miniatury zwiększają rozpoznawalność</span>
+                <span class="pill">CTA i układ są bardziej jednoznaczne</span>
               </div>
+
+              <div class="quick-links-compact" id="quick-links-compact"></div>
             </aside>
           </div>
         </div>
@@ -793,10 +126,15 @@
                   <div class="eyebrow">Sekcja 01</div>
                   <h2 class="section-heading" id="kalkulatory-title">Kalkulatory</h2>
                 </div>
-                <p class="section-lead">Najważniejsze konfiguratory ofertowe i ich wersje robocze. To sekcja, do której zespół powinien trafiać najszybciej.</p>
+                <p class="section-lead">
+                  Najważniejsze konfiguratory ofertowe i ich wersje robocze. GigaNET i
+                  GigaBOX są wyróżnione jako główne narzędzia operacyjne zespołu.
+                </p>
               </div>
+
               <div class="cards-wrap">
-                <div class="card-grid" id="calculators-grid"></div>
+                <div class="featured-section-grid" id="priority-calculators-grid"></div>
+                <div class="card-grid compact-grid" id="calculators-grid"></div>
               </div>
             </section>
 
@@ -806,7 +144,10 @@
                   <div class="eyebrow">Sekcja 02</div>
                   <h2 class="section-heading" id="narzedzia-title">Narzędzia i skróty</h2>
                 </div>
-                <p class="section-lead">Linki operacyjne do map, repozytoriów, dashboardów, SharePoint, Power Automate i innych zasobów roboczych.</p>
+                <p class="section-lead">
+                  Linki operacyjne do map, repozytoriów, dashboardów, SharePoint,
+                  Power Automate i innych zasobów roboczych.
+                </p>
               </div>
               <div class="cards-wrap">
                 <div class="card-grid" id="tools-grid"></div>
@@ -819,7 +160,10 @@
                   <div class="eyebrow">Sekcja 03</div>
                   <h2 class="section-heading" id="materialy-title">Materiały operacyjne</h2>
                 </div>
-                <p class="section-lead">Ofertówki, instrukcje, procedury i foldery robocze. Gotowe miejsce na rozwój bazy wiedzy zespołu.</p>
+                <p class="section-lead">
+                  Ofertówki, instrukcje, procedury i foldery robocze. Gotowe miejsce na
+                  rozwój bazy wiedzy zespołu.
+                </p>
               </div>
               <div class="cards-wrap">
                 <div class="card-grid" id="resources-grid"></div>
@@ -839,35 +183,54 @@
                   <div class="workflow-list">
                     <div class="workflow-item">
                       <div class="workflow-key">Krok 01</div>
-                      <div class="workflow-value">Wejdź do sekcji „Kalkulatory” i wybierz odpowiedni konfigurator dla rozmowy z klientem.</div>
+                      <div class="workflow-value">
+                        Wejdź do sekcji „Najważniejsze kalkulatory” albo kliknij od razu
+                        w wyróżnioną kartę GigaNET / GigaBOX w hero.
+                      </div>
                     </div>
                     <div class="workflow-item">
                       <div class="workflow-key">Krok 02</div>
-                      <div class="workflow-value">Jeżeli potrzebujesz zasobu pomocniczego, przejdź do sekcji „Narzędzia i skróty”.</div>
+                      <div class="workflow-value">
+                        Jeżeli potrzebujesz zasobu pomocniczego, przejdź do sekcji
+                        „Narzędzia i skróty”.
+                      </div>
                     </div>
                     <div class="workflow-item">
                       <div class="workflow-key">Krok 03</div>
-                      <div class="workflow-value">W sekcji „Materiały operacyjne” trzymaj aktualne ofertówki, SOP-y i dokumenty robocze.</div>
+                      <div class="workflow-value">
+                        W sekcji „Materiały operacyjne” trzymaj aktualne ofertówki,
+                        SOP-y i dokumenty robocze.
+                      </div>
                     </div>
                     <div class="workflow-item">
                       <div class="workflow-key">Krok 04</div>
-                      <div class="workflow-value">Nowe kafle dodawaj tylko w tablicy danych JS — bez przebudowy struktury strony.</div>
+                      <div class="workflow-value">
+                        Nowe kafle dodawaj tylko w tablicy danych JS — bez przebudowy
+                        struktury strony.
+                      </div>
                     </div>
                   </div>
                 </div>
+
                 <aside class="workflow-side">
                   <div class="workflow-list">
                     <div class="workflow-item">
                       <div class="workflow-key">Plus</div>
-                      <div class="workflow-value">Mniej rozproszenia: jeden panel zamiast wielu osobnych zakładek.</div>
+                      <div class="workflow-value">
+                        Mniej rozproszenia: dwa główne kalkulatory są od razu czytelne.
+                      </div>
                     </div>
                     <div class="workflow-item">
                       <div class="workflow-key">Plus</div>
-                      <div class="workflow-value">Lżejszy układ na desktopie: więcej treści mieści się na pierwszym ekranie.</div>
+                      <div class="workflow-value">
+                        Sekcja „Kalkulatory” ma teraz wyraźny podział na priorytet i resztę.
+                      </div>
                     </div>
                     <div class="workflow-item">
                       <div class="workflow-key">Plus</div>
-                      <div class="workflow-value">Branding jest bardziej Multiplay dzięki realnym plikom graficznym, a nie tylko kolorom.</div>
+                      <div class="workflow-value">
+                        Kod jest rozdzielony na HTML, CSS i JS, więc łatwiej go dalej rozwijać.
+                      </div>
                     </div>
                   </div>
                 </aside>
@@ -880,7 +243,10 @@
                   <div class="eyebrow">Sekcja 05</div>
                   <h2 class="section-heading" id="next-steps-title">Następne rozszerzenia</h2>
                 </div>
-                <p class="section-lead">Ten layout jest już dobrym agregatorem. Kolejny etap to funkcje ułatwiające pracę przy większej liczbie linków.</p>
+                <p class="section-lead">
+                  Ten layout jest już mocnym agregatorem. Kolejny etap to funkcje
+                  ułatwiające pracę przy większej liczbie linków.
+                </p>
               </div>
               <div class="cta-strip">
                 <article class="cta-box green">
@@ -890,6 +256,7 @@
                   </div>
                   <span class="pill">Najbardziej praktyczny kolejny krok</span>
                 </article>
+
                 <article class="cta-box yellow">
                   <div>
                     <h3>Filtry działowe</h3>
@@ -897,6 +264,7 @@
                   </div>
                   <span class="pill">Lepsze porządkowanie zasobów</span>
                 </article>
+
                 <article class="cta-box red">
                   <div>
                     <h3>Nowości i zmiany</h3>
@@ -914,14 +282,21 @@
             <div class="footer-inner">
               <div class="footer-top">
                 <div>
-                  <div class="brand" style="margin-bottom: 14px;">
-                    <img class="brand-logo" src="Multiplay_logo_landscape_full-300x119.png" alt="Multiplay" />
-                    <span class="brand-badge" style="background: rgba(255,255,255,.06); color: #f0f3ef; border-color: rgba(255,255,255,.12);">Hub pracownika</span>
+                  <div class="brand footer-brand">
+                    <img
+                      class="brand-logo"
+                      src="Multiplay_logo_landscape_full-300x119.png"
+                      alt="Multiplay"
+                    />
+                    <span class="brand-badge footer-badge">Hub pracownika</span>
                   </div>
                   <p class="footer-copy">
-                    Wewnętrzny agregator linków Multiplay do kalkulatorów, zasobów i narzędzi operacyjnych. Układ uproszczony tak, żeby był bardziej czytelny na komputerze i łatwiejszy do utrzymania.
+                    Wewnętrzny agregator linków Multiplay do kalkulatorów, zasobów i
+                    narzędzi operacyjnych. Układ uproszczony tak, żeby był bardziej
+                    czytelny na komputerze i łatwiejszy do utrzymania.
                   </p>
                 </div>
+
                 <nav class="footer-links" aria-label="Linki w stopce">
                   <a href="#kalkulatory">Kalkulatory</a>
                   <a href="#narzedzia">Narzędzia</a>
@@ -929,9 +304,10 @@
                   <a href="#workflow">Workflow</a>
                 </nav>
               </div>
+
               <div class="footer-bottom">
                 <span>© 2026 Multiplay Hub</span>
-                <span>Wersja desktop-friendly z brandingiem Multiplay</span>
+                <span>Wersja z wyróżnionymi kalkulatorami i mini-preview</span>
               </div>
             </div>
           </div>
@@ -940,248 +316,6 @@
     </div>
   </div>
 
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-
-    const lenis = new Lenis({
-      lerp: 0.1,
-      smoothWheel: true,
-      syncTouch: false
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
-
-    const appData = {
-      calculators: [
-        {
-          index: '01',
-          title: 'GigaNET',
-          desc: 'Kalkulator oferty internetowej dla zespołu sprzedażowego i obsługi klienta.',
-          status: 'live',
-          meta: 'Kalkulator główny',
-          link: 'https://multiplay-pages.github.io/giganet_kalkulator/',
-          cta: 'Otwórz kalkulator',
-          tags: ['Internet', 'Sprzedaż', 'BOK']
-        },
-        {
-          index: '02',
-          title: 'GigaBOX',
-          desc: 'Kalkulator pakietów z TV i dodatkami, gotowy do codziennej pracy zespołu.',
-          status: 'live',
-          meta: 'Pakiety + TV',
-          link: 'https://multiplay-pages.github.io/gigabox_kalkulator/',
-          cta: 'Otwórz kalkulator',
-          tags: ['Pakiety', 'TV', 'Upsell']
-        },
-        {
-          index: '03',
-          title: 'Wersja testowa / sandbox',
-          desc: 'Miejsce na testy nowego UI, modułów promocyjnych i eksperymentów przed wdrożeniem.',
-          status: 'beta',
-          meta: 'Środowisko robocze',
-          link: 'https://multiplay-pages.github.io/test/index2.html',
-          cta: 'Otwórz test',
-          tags: ['Testy', 'UI', 'Eksperymenty']
-        },
-        {
-          index: '04',
-          title: 'Nowy kalkulator',
-          desc: 'Rezerwowe miejsce pod kolejny konfigurator, np. B2B, promocje albo warianty specjalne.',
-          status: 'soon',
-          meta: 'Do uzupełnienia',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Nowe', 'Rozwój']
-        },
-        {
-          index: '05',
-          title: 'Kalkulator pomocniczy',
-          desc: 'Blok pod narzędzie wspierające pracę BOK, techniki lub ofert specjalnych.',
-          status: 'soon',
-          meta: 'Placeholder',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Support', 'BOK']
-        },
-        {
-          index: '06',
-          title: 'Kalkulator dedykowany',
-          desc: 'Miejsce na przyszły wariant narzędzia z logiką dla konkretnych promocji lub kanału sprzedaży.',
-          status: 'soon',
-          meta: 'Placeholder',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Dedykowane', 'Kanały']
-        }
-      ],
-      tools: [
-        {
-          index: '01',
-          title: 'Google My Maps',
-          desc: 'Skrót do map roboczych, adresów, wizualizacji i operacyjnych warstw terenowych.',
-          status: 'beta',
-          meta: 'Podmień link',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Mapy', 'Adresy', 'GIS']
-        },
-        {
-          index: '02',
-          title: 'Repozytoria GitHub Pages',
-          desc: 'Dostęp do repo z kalkulatorami i stronami roboczymi, np. do aktualizacji layoutu i cen.',
-          status: 'live',
-          meta: 'GitHub / Pages',
-          link: 'https://github.com/multiplay-pages',
-          cta: 'Otwórz repo',
-          tags: ['GitHub', 'Kod', 'Publikacja']
-        },
-        {
-          index: '03',
-          title: 'Power Automate / SharePoint',
-          desc: 'Miejsce na skróty do flow, list, dashboardów i formularzy operacyjnych.',
-          status: 'soon',
-          meta: 'Podmień link',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Automatyzacja', 'SharePoint']
-        }
-      ],
-      resources: [
-        {
-          index: '01',
-          title: 'Ofertówki i cenniki',
-          desc: 'Sekcja na aktualne dokumenty sprzedażowe, warianty ofert i materiały dla pracowników.',
-          status: 'soon',
-          meta: 'Folder / wiki',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Oferta', 'Cenniki']
-        },
-        {
-          index: '02',
-          title: 'Procedury i instrukcje',
-          desc: 'Miejsce na checklisty, SOP-y, instrukcje pracy i dokumentację wdrożeniową.',
-          status: 'soon',
-          meta: 'Folder / wiki',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Procedury', 'Instrukcje']
-        },
-        {
-          index: '03',
-          title: 'Materiały robocze',
-          desc: 'Sekcja pod pliki pomocnicze, testy, briefy, dokumenty tymczasowe i wersje robocze.',
-          status: 'soon',
-          meta: 'Folder / wiki',
-          link: '#',
-          cta: 'Dodaj link',
-          tags: ['Robocze', 'Wersje']
-        }
-      ]
-    };
-
-    function getStatusClass(status) {
-      if (status === 'live') return 'status-live';
-      if (status === 'beta') return 'status-beta';
-      return 'status-soon';
-    }
-
-    function getStatusLabel(status) {
-      if (status === 'live') return 'Aktywne';
-      if (status === 'beta') return 'Test / beta';
-      return 'W przygotowaniu';
-    }
-
-    function createCard(item) {
-      const article = document.createElement('article');
-      article.className = 'tool-card';
-      const tagsHtml = (item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('');
-      const isPlaceholder = item.link === '#';
-
-      article.innerHTML = `
-        <div class="card-top">
-          <div class="card-index">${item.index}</div>
-          <span class="card-status ${getStatusClass(item.status)}">${getStatusLabel(item.status)}</span>
-        </div>
-        <div>
-          <h3 class="card-title">${item.title}</h3>
-          <p class="card-desc" style="margin-top: 10px;">${item.desc}</p>
-        </div>
-        <div class="card-tags">${tagsHtml}</div>
-        <div class="card-footer">
-          <a class="card-link ${isPlaceholder ? 'secondary' : ''}" href="${item.link}" ${isPlaceholder ? '' : 'target="_blank" rel="noopener noreferrer"'}>${item.cta}</a>
-          <span class="card-meta">${item.meta}</span>
-        </div>
-      `;
-
-      return article;
-    }
-
-    function renderSection(gridId, items) {
-      const grid = document.getElementById(gridId);
-      if (!grid) return;
-      grid.innerHTML = '';
-      items.forEach(item => grid.appendChild(createCard(item)));
-    }
-
-    function initNavigation() {
-      const links = document.querySelectorAll('a[href^="#"]');
-      links.forEach(link => {
-        link.addEventListener('click', (event) => {
-          const href = link.getAttribute('href');
-          if (!href || href === '#') return;
-          const target = document.querySelector(href);
-          if (!target) return;
-          event.preventDefault();
-          lenis.scrollTo(target, {
-            offset: -92,
-            duration: 1.02
-          });
-        });
-      });
-    }
-
-    function initAnimations() {
-      gsap.from('.hero-main, .hero-side', {
-        y: 24,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        stagger: 0.08
-      });
-
-      gsap.utils.toArray('.section-shell').forEach((section) => {
-        gsap.from(section, {
-          y: 24,
-          opacity: 0,
-          duration: 0.7,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 86%'
-          }
-        });
-      });
-    }
-
-    function initApp() {
-      renderSection('calculators-grid', appData.calculators);
-      renderSection('tools-grid', appData.tools);
-      renderSection('resources-grid', appData.resources);
-      initNavigation();
-      initAnimations();
-      ScrollTrigger.refresh();
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initApp);
-    } else {
-      initApp();
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
