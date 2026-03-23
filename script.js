@@ -24,7 +24,7 @@ const appData = {
       cta: "Otwórz kalkulator",
       meta: "Najczęściej używany kalkulator internetowy",
       tags: ["Internet", "Sprzedaż", "BOK", "Nowy / obecny klient"],
-      image: "assets/previews/giganet-preview.webp"
+      image: "assets/previews/giganet-preview.png"
     },
     {
       key: "gigabox",
@@ -36,7 +36,7 @@ const appData = {
       cta: "Otwórz kalkulator",
       meta: "Pakiety internet + TV + dodatki",
       tags: ["Pakiety", "TV", "Upsell", "Dodatki premium"],
-      image: "assets/previews/gigabox-preview.webp"
+      image: "assets/previews/gigabox-preview.png"
     }
   ],
 
